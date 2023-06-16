@@ -78,7 +78,7 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-                       <p> Welcome to My first Ecommerce Project 10-5-2023 </p>
+                       <p> Welcome to My first Ecommerce Project</p>
                 {{-- {{ $obj -> name}}  his age is {{$obj -> age  }} --}}
             </div>
         </div>

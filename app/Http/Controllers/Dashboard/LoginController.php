@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$remember_me)){
 
-            return redirect()->intended('admin/dashboard')->with(['success' => 'هناك خطا بالبيانات']);;
+            return redirect()->intended('admin/dashboard')->with(['success' => 'تم الدخول بنجاح']);
         }
         return redirect()->back()->with(['error' => 'هناك خطا بالبيانات']);    
     }   
