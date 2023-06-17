@@ -32,5 +32,13 @@ return [
     'Customer' =>         'الزبون',
     'Product' =>          'المنتج',
     'Evaluation' =>       'التقييم',
+    'Main_page' =>'الصفحة الرئيسية',
+    'shipping_methods_Edit' =>'تعديل وسيلة التوصيل',
+    'shipping_method_name' =>'الاسم',
+    'shipping_Cost' =>'الكلفة',
+    'Save' =>'حفظ',
+    'Undo' =>'تراجع',
+    'Store_Data' =>'بيانات المتجر',
+
 
 ];

@@ -15,7 +15,7 @@ return [
 
     'dashboard' => 'dashboard',
     'settings' => 'settings',
-    'shipping-methods' => 'shipping methods',
+    'shipping-methods' => 'Shipping Methods',
     'free-shipping' =>'free shipping',
     'local-shipping' =>'local shipping',
     'external-shipping' =>'external shipping',
@@ -32,6 +32,12 @@ return [
     'Latest-Evaluation' =>'Latest-Evaluation',
     'Customer' =>'Customer',
     'Product' =>'Product',
-    'Evaluation' =>'Evaluation',
+    'Main_page' =>'Main Page',
+    'shipping_methods_Edit' =>'Shipping Methods Edit',
+    'shipping_method_name' =>'Shipping Method Name',
+    'shipping_Cost' =>'Shipping Cost',
+    'Save' =>'Save',
+    'Undo' =>'Undo',
+    'Store_Data' =>'Store Data',
 
 ];

@@ -30,7 +30,7 @@ class SettingDatabaseSeeder extends Seeder
                 'store_name' => 'Majd Store',
                 'free_shipping_label' => 'Free Shipping',
                 'local_label' => 'Local Shipping',
-                'outer_label' => 'Outer Shipping',
+                'outer_label' => 'External Shipping',
             ],
         ]);
     }
