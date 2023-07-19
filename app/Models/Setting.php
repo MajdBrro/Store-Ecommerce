@@ -18,6 +18,7 @@ class Setting extends Model
 
     
     protected $fillable = ['key', 'is_translatable', 'plain_value'];
+    // protected $hidden =['translations'];//لكل الداتا الراجعة return لإخفاء الترجمات من الظهور عندما نعمل 
 
     
     protected $casts = [

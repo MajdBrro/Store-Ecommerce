@@ -33,8 +33,10 @@ class SettingsController extends Controller
         $shipping = Setting::findOrFail($id);
         $shipping -> update([
             'plain_value' => $Request -> plain_value,
-            'value' => $Request -> value,
+            // 'value' => $Request -> value,
     ]);
+            $shipping -> value = $Request -> value;
+            $shipping -> save();
     // الحل الاسهل لأنه يرجعنا لنفس الرابط السابق مع الارغيومينت وكلشي ومعه أيضا رسالة تنبيه بالنجاح
     return redirect() -> back() -> with(['success' => 'it was done successful']);
     // الحل الاسهل لأنه يرجعنا لنفس الرابط السابق مع الارغيومينت وكلشي ومعه أيضا رسالة تنبيه بالنجاح
