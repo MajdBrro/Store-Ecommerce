@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLoginRequest;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,4 +29,13 @@ class LoginController extends Controller
         }
         return redirect()->back()->with(['error' => 'هناك خطا بالبيانات']);    
     }   
+    public function logout(){
+        // $guard = $this -> getGuard();
+        // $guard -> logout();
+        Auth::Logout('admin');
+        return redirect()-> route('admin.login');
+    }
+    // private function getGuard(){
+    //     return auth('admin');
+    // }
 }

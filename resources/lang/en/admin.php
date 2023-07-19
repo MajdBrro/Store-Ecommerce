@@ -39,5 +39,13 @@ return [
     'Save' =>'Save',
     'Undo' =>'Undo',
     'Store_Data' =>'Store Data',
+    'Hello' =>'Hello',
+    'Logout' => 'Logout',
+    'change_language' => 'change language',
+    'available' => 'available',
+    'un_available' => 'un available',
+    'edit' => 'edit',
+    'delete' => 'delete',
+    'it_was_deleted_successfully' => 'it was deleted successfully',
 
 ];

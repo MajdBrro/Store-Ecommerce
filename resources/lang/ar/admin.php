@@ -39,6 +39,21 @@ return [
     'Save' =>'حفظ',
     'Undo' =>'تراجع',
     'Store_Data' =>'بيانات المتجر',
+    'Hello' =>'مرحباً',
+    'Logout' => 'تسجيل الخروج',
+    'change_language' => 'تغيير اللغة',
+    'available' => 'مفعل',
+    'un_available' => 'غير مفعل',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'it_was_deleted_successfully' => 'تم الحذف بنجاح',
+
+
+
+
+
+
+
 
 
 ];
