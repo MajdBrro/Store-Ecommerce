@@ -45,12 +45,18 @@ public function create(){
 ###################################################################################################
 public function store(Request $request){
     // return $request;
-    Category::create([
-        'name' => $request -> input('name'),
-        'slug' => $request -> input('slug'),
-        'parent_id' => $request -> input('parent_id') ,
-        'is_active' => $request -> is_active == 1 ? "1" : "0",
-    ]);
+    $category=new Category();
+    $category->name = $request -> name;
+    $category->slug = $request -> slug;
+    $category->is_active = $request -> is_active;
+    $category->parent_id = $request -> parent_id;
+    $category->save();
+    // Category::create([
+    //     'name' => $request -> input('name'),
+    //     'slug' => $request -> input('slug'),
+    //     'parent_id' => $request -> input('parent_id') ,
+    //     'is_active' => $request -> is_active == 1 ? "1" : "0",
+    // ]);
     return redirect()->route('admin.subcategories') -> with(['success' => 'it was added successful']);
 }
 ###################################################################################################

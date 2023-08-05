@@ -25,7 +25,10 @@ class Category extends Model
         return $query -> whereNotNull('parent_id');
     }
 
-   
+   public function _parent(){
+    return $this -> belongsTo( self::class , 'parent_id');
+   }
+
 
 
 
@@ -33,7 +36,7 @@ class Category extends Model
     public function getActive(){
         return $this -> is_active == 0 ? __('admin.un_available') : __('admin.available');
         // return  $this -> is_active  == 0 ?  ' مفعل'   : 'غير مفعل' ;
-
     }
+    
 
 }
