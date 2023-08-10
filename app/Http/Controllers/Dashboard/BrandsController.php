@@ -60,7 +60,7 @@ public function store(Request $request){
     return redirect()->route('admin.brands') -> with(['success' => 'it was added successful']);
 }
 ###################################################################################################
-public function destroy($id)
+public function delete($id)
 {
     $del=Brand::Find($id);
     // return $del;

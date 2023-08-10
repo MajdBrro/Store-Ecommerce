@@ -59,9 +59,19 @@ Route::group(
             Route::PUT('store', 'BrandsController@store')->name('admin.brands.store');
             Route::get('edit/{id}', 'BrandsController@edit')->name('admin.brands.edit');
             Route::PUT('update/{id}', 'BrandsController@update')->name('admin.brands.update');
-            Route::get('delete/{id}', 'BrandsController@destroy')->name('admin.brands.delete');
+            Route::get('delete/{id}', 'BrandsController@delete')->name('admin.brands.delete');
         });
         ################################## end Brands    #######################################
+        ################################## Tags routes ######################################
+        Route::group(['prefix' => 'Tags'], function () {
+            Route::get('/', 'TagsController@index')->name('admin.tags');
+            Route::get('create', 'TagsController@create')->name('admin.tags.create');
+            Route::PUT('store', 'TagsController@store')->name('admin.tags.store');
+            Route::get('edit/{id}', 'TagsController@edit')->name('admin.tags.edit');
+            Route::PUT('update/{id}', 'TagsController@update')->name('admin.tags.update');
+            Route::get('delete/{id}', 'TagsController@delete')->name('admin.tags.delete');
+        });
+        ################################## end Tags    #######################################
     });
     
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'guest:admin','prefix'=> 'admin'], function(){
