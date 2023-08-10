@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MainCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
 class MainCategoriesController extends Controller
 {
     public function index(){
+        // $categories = Category::get();
         $categories = Category::parent()-> orderBy('id','DESC')-> whereNull('parent_id') ->paginate(PAGINATION_COUNT);
         return view('dashboard.categories.index',compact('categories'));
     }
@@ -40,13 +39,18 @@ public function create(){
     return view('dashboard.categories.create');
 }
 ###################################################################################################
-public function store(MainCategoryRequest $request){
+public function store(Request $request){
     // return $request;
-    Category::create([
-        'name' => $request -> input('name'),
-        'slug' => $request -> input('slug'),
-        'is_active' => $request -> is_active == 1 ? "1" : "0",
-    ]);
+    $category=new Category();
+    $category->name = $request -> name;
+    $category->slug = $request -> slug;
+    $category->is_active = $request -> is_active;
+    $category->save();
+    // Category::create([
+    //     'name' => $request -> name,
+    //     'slug' => $request -> slug,
+    //     'is_active' => $request -> is_active == 1 ? "1" : "0",
+    // ]);
     return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
 }
 ###################################################################################################
