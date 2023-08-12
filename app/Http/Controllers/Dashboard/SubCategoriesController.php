@@ -38,9 +38,9 @@ public function update(Request $request, $id){
     
 }
 ###################################################################################################
-public function create(){
-    $categories = Category::parent()-> orderBy('id','DESC')-> whereNull('parent_id') ->paginate(PAGINATION_COUNT);
-    return view('dashboard.subcategories.create',compact('categories'));
+public function create($name,$slug){
+    $categories = Category::all();
+    return view('dashboard.subcategories.create',compact('categories','name','slug'));
 }
 ###################################################################################################
 public function store(Request $request){

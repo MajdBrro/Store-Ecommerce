@@ -69,7 +69,7 @@
                                                             <input type="text" id="name"
                                                                    class="form-control"
                                                                    placeholder="  "
-                                                                   {{-- value="{{old('name')}}" --}}
+                                                                   value="{{$name}}"
                                                                    name="name">
                                                             @error("name")
                                                             <span class="text-danger">{{$message}}</span>
@@ -84,7 +84,7 @@
                                                             <input type="text" id="name"
                                                                    class="form-control"
                                                                    placeholder="  "
-                                                                   {{-- value="{{old('slug')}}" --}}
+                                                                   value="{{$slug}}"
                                                                    name="slug">
                                                             @error("slug")
                                                             <span class="text-danger">{{$message}}</span>
@@ -111,7 +111,7 @@
                                                 <div class="row" id="cats_list" >
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اختر القسم الرئيسي </label>
+                                                            <label for="projectinput1"> اختر القسم الذي يتبع له  </label>
                                                             <select name="parent_id" class="select2 form-control">
                                                                 <optgroup label="من فضلك أختر القسم ">
                                                                     @if($categories && $categories -> count() > 0)
