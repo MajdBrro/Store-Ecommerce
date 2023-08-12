@@ -6,7 +6,7 @@
                         class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
             </li>
 
-            <li class="nav-item  open ">
+            <li class="active" class="nav-item  open ">
                 <a href=""><i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">لغات الموقع </span>
                     <span
@@ -16,29 +16,32 @@
                     <li class="active"><a class="menu-item" href=""
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
+                    <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
                             لغة جديده </a>
                     </li>
                 </ul>
             </li>
 
 
-            <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
+            <li class="active" class="nav-item"><a href=""><i class="la la-group"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام  </span>
                     <span
                         class="badge badge badge-danger badge-pill float-right mr-2">{{-- app\Models\Category::parent()->count() --}}</span>
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{ route('admin.maincategories') }}"
-                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                                          data-i18n="nav.dash.ecommerce"> عرض الأقسام الرئيسية </a>
                     </li>
-                    <li><a class="menu-item" href="{{ route('admin.maincategories.create') }}" data-i18n="nav.dash.crypto">أضافة
+                    <li class="active"><a class="menu-item" href="{{ route('admin.subcategories') }}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الأقسام الفرعية </a>
+                    </li>
+                    <li class="active"><a class="menu-item" href="{{ route('admin.maincategories.create') }}" data-i18n="nav.dash.crypto">أضافة
                              قسم جديد </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="nav-item"><a href=""><i class="la la-group"></i>
+            {{-- <li class="nav-item"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية   </span>
                     <span
                         class="badge badge badge-danger badge-pill float-right mr-2">400</span>
@@ -51,9 +54,9 @@
                             قسم فرعي جديد </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
-            <li class="nav-item"><a href=""><i class="la la-male"></i>
+            <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الماركات   </span>
                     <span
                         class="badge badge badge-success badge-pill float-right mr-2"></span>
@@ -62,12 +65,12 @@
                     <li class="active"><a class="menu-item" href="{{ route('admin.brands') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{ route('admin.brands.create') }}" data-i18n="nav.dash.crypto">أضافة
+                    <li class="active"><a class="menu-item" href="{{ route('admin.brands.create') }}" data-i18n="nav.dash.crypto">أضافة
                             ماركة جديدة  </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a href=""><i class="la la-male"></i>
+            <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> tags العلامات   </span>
                     <span
                         class="badge badge badge-success badge-pill float-right mr-2"></span>
@@ -76,7 +79,7 @@
                     <li class="active"><a class="menu-item" href="{{ route('admin.tags') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{ route('admin.tags.create') }}" data-i18n="nav.dash.crypto">أضافة
+                    <li class="active"><a class="menu-item" href="{{ route('admin.tags.create') }}" data-i18n="nav.dash.crypto">أضافة
                             إضافة علامة جديدة </a>
                     </li>
                 </ul>
@@ -87,17 +90,17 @@
             
 
 
-            <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
+            <li   class="active" class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
                                                                                     data-i18n="nav.templates.main">{{ __('admin.settings') }}</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{ __('admin.shipping-methods') }}</a>
+                    <li class="active"><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{ __('admin.shipping-methods') }}</a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{ route('edit.shippings.methods','free') }}"
+                            <li class="active"><a class="menu-item" href="{{ route('edit.shippings.methods','free') }}"
                                    data-i18n="nav.templates.vert.classic_menu">{{ __('admin.free-shipping') }} </a>
                             </li>
-                            <li><a class="menu-item" href="{{ route('edit.shippings.methods','local') }}">{{ __('admin.local-shipping') }}</a>
+                            <li class="active"><a class="menu-item" href="{{ route('edit.shippings.methods','local') }}">{{ __('admin.local-shipping') }}</a>
                             </li>
-                            <li><a class="menu-item" href="{{ route('edit.shippings.methods','external') }}"
+                            <li class="active"><a class="menu-item" href="{{ route('edit.shippings.methods','external') }}"
                                    data-i18n="nav.templates.vert.compact_menu">{{ __('admin.external-shipping') }}</a>
                             </li>
                            

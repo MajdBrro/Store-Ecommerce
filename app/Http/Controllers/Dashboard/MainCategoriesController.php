@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 
 class MainCategoriesController extends Controller
 {
@@ -36,22 +37,32 @@ public function update(Request $request, $id){
 }
 ###################################################################################################
 public function create(){
-    return view('dashboard.categories.create');
+    $categories=Category::all();
+    return view('dashboard.categories.create',compact('categories'));
 }
 ###################################################################################################
 public function store(Request $request){
     // return $request;
+    if($request->type ==1)
+    {
     $category=new Category();
     $category->name = $request -> name;
     $category->slug = $request -> slug;
     $category->is_active = $request -> is_active;
     $category->save();
+    return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+    }
+    else
+    $name=$request -> name;
+    $slug=$request -> slug;
+    return redirect()->route('admin.subcategories.create',compact('name','slug'));
+    
+
     // Category::create([
     //     'name' => $request -> name,
     //     'slug' => $request -> slug,
     //     'is_active' => $request -> is_active == 1 ? "1" : "0",
     // ]);
-    return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
 }
 ###################################################################################################
 public function delete($id){

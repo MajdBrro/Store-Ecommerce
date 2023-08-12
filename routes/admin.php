@@ -45,7 +45,7 @@ Route::group(
         ################################## sub categories routes ######################################
         Route::group(['prefix' => 'sub_categories'], function () {
             Route::get('/', 'SubCategoriesController@index')->name('admin.subcategories');
-            Route::get('create', 'SubCategoriesController@create')->name('admin.subcategories.create');
+            Route::get('create/{name}/{slug}','SubCategoriesController@create')->name('admin.subcategories.create');
             Route::PUT('store', 'SubCategoriesController@store')->name('admin.subcategories.store');
             Route::get('edit/{id}', 'SubCategoriesController@edit')->name('admin.subcategories.edit');
             Route::PUT('update/{id}', 'SubCategoriesController@update')->name('admin.subcategories.update');
