@@ -30,11 +30,11 @@
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{ route('admin.maincategories') }}"
-                                          data-i18n="nav.dash.ecommerce"> عرض الأقسام الرئيسية </a>
+                                          data-i18n="nav.dash.ecommerce"> عرض الأقسام  </a>
                     </li>
-                    <li class="active"><a class="menu-item" href="{{ route('admin.subcategories') }}"
+                    {{-- <li class="active"><a class="menu-item" href="{{ route('admin.subcategories') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الأقسام الفرعية </a>
-                    </li>
+                    </li> --}}
                     <li class="active"><a class="menu-item" href="{{ route('admin.maincategories.create') }}" data-i18n="nav.dash.crypto">أضافة
                              قسم جديد </a>
                     </li>
