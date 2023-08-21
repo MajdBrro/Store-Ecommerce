@@ -94,7 +94,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row hidden" id="cats_list" >
+                                                {{-- <div  id="cats_list" >
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اختر القسم الرئيسي
@@ -114,7 +114,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
@@ -122,7 +122,7 @@
                                                                    name="is_active"
                                                                    id="switcheryColor4"
                                                                    class="switchery" data-color="success"
-                                                                   checked/>
+                                                                   >
                                                             <label for="switcheryColor4"
                                                                    class="card-title ml-1">الحالة </label>
 
@@ -193,7 +193,7 @@
 
 @stop
 
-@section('script')
+{{-- @section('script')
 
     <script>
         $('input:radio[name="type"]').change(
@@ -206,4 +206,4 @@
                 }
             });
     </script>
-    @stop
+    @stop --}}

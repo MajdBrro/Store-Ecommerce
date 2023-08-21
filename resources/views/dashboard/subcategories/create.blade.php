@@ -206,7 +206,7 @@
 
 @stop
 
-@section('script')
+{{-- @section('script')
 
     <script>
         $('input:radio[name="type"]').change(
@@ -219,4 +219,4 @@
                 }
             });
     </script>
-    @stop
+    @stop --}}
