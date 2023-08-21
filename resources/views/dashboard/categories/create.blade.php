@@ -94,10 +94,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <div  id="cats_list" >
+                                                {{-- <div class="row hidden" id="cats_list" >
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اختر القسم الرئيسي
+                                                            <label for="projectinput1"> اختر القسم الذي يتبع له
                                                             </label>
                                                             <select name="parent_id" class="select2 form-control">
                                                                 <optgroup label="من فضلك أختر القسم ">
@@ -118,11 +118,13 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                   name="is_active"
+                                                            <input type="checkbox" 
+                                                                   name="is_active" value="1"
+                                                                   {{-- @if(@checked(true)) value="1" @endif
+                                                                   @else value="0" --}}
                                                                    id="switcheryColor4"
                                                                    class="switchery" data-color="success"
-                                                                   >
+                                                                   checked/>
                                                             <label for="switcheryColor4"
                                                                    class="card-title ml-1">الحالة </label>
 
@@ -193,7 +195,7 @@
 
 @stop
 
-{{-- @section('script')
+@section('script')
 
     <script>
         $('input:radio[name="type"]').change(
@@ -206,4 +208,4 @@
                 }
             });
     </script>
-    @stop --}}
+@stop

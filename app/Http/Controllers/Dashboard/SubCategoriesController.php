@@ -48,7 +48,7 @@ public function store(Request $request){
     $category=new Category();
     $category->name = $request -> name;
     $category->slug = $request -> slug;
-    $category->is_active = $request -> is_active;
+    $category->is_active = $request -> is_active == 1 ? "1" : "0";
     $category->parent_id = $request -> parent_id;
     $category->save();
     // Category::create([
