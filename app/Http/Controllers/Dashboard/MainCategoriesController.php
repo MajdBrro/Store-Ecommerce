@@ -11,6 +11,7 @@ class MainCategoriesController extends Controller
 {
     public function index(){
         // $categories = Category::get();
+        // $categories = Category::parent()-> orderBy('id','DESC')-> whereNull('parent_id') ->paginate(PAGINATION_COUNT);
         $categories = Category::paginate(PAGINATION_COUNT);
         return view('dashboard.categories.index',compact('categories'));
     }
@@ -79,32 +80,52 @@ public function create(){
 }
 ###################################################################################################
 public function store(Request $request){
-#######   واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و  #######
-####### واحد View يجمع فيها تعديل كل الاقسام مع بعضها ب  Categories  السيناريو الثاني يوجد فقط  #######
-
+####### واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و #######
+#######     By My self  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الأول #######
 // return $request;
-    if($request->type ==1)
+if($request->type ==1)
     {
-    $request->except('parent_id');
-    $category=new Category();
-    $category->name = $request -> name;
-    $category->slug = $request -> slug;
-    $category->is_active = $request -> is_active;
-    $category->save();
-    return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+        $category=new Category();
+        $category->name = $request -> name;
+        $category->slug = $request -> slug;
+        $category->is_active = $request -> is_active == 1 ? "1" : "0";
+        $category->save();
+        return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
     }
-    elseif($request->type ==2){
-    // return $request;
-    $category=new Category();
-    $category->name = $request -> name;
-    $category->slug = $request -> slug;
-    $category->is_active = $request -> is_active;
-    $category->parent_id = $request -> parent_id;
-    $category->save();
-    return redirect()->route('admin.subcategories') -> with(['success' => 'it was added successful']);
-}
+elseif($request->type ==2)
+{
+        $categories=Category::all();
+        $name        =$request -> name;
+        $slug        =$request -> slug;
+        $is_active   =$request -> is_active == 1 ? "1" : "0";
+        return view('dashboard.subcategories.create',compact('categories','name','slug','is_active'));
+    }   
+#######     By My self  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الأول #######
+#############################################################################################
+#######     By Emmam  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الثاني #######
+// return $request;
+    // if($request->type ==1)
+    // {
+    // $request->except('parent_id');
+    // $category=new Category();
+    // $category->name = $request -> name;
+    // $category->slug = $request -> slug;
+    // $category->is_active = $request -> is_active == 1 ? "1" : "0";
+    // $category->save();
+    // return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+    // }
+    // elseif($request->type ==2){
+    // // return $request;
+    // $category=new Category();
+    // $category->name = $request -> name;
+    // $category->slug = $request -> slug;
+    // $category->is_active = $request -> is_active == 1 ? "1" : "0";
+    // $category->parent_id = $request -> parent_id;
+    // $category->save();
+    // return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+// }
+#######     By Emmam  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الثاني #######
 #######   واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و  #######
-####### واحد View يجمع فيها تعديل كل الاقسام مع بعضها ب  Categories  السيناريو الثاني يوجد فقط  #######
 
 
 // Category::create([

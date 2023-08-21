@@ -34,7 +34,7 @@ class Category extends Model
 
 
     public function getActive(){
-        return $this -> is_active == 0 ? __('admin.un_available') : __('admin.available');
+        return $this -> is_active == 1 ? __('admin.available') : __('admin.un_available');
         // return  $this -> is_active  == 0 ?  ' مفعل'   : 'غير مفعل' ;
     }
     
