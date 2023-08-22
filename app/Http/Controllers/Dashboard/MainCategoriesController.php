@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Exists;
+use SebastianBergmann\Type\NullType;
 
 class MainCategoriesController extends Controller
 {
@@ -18,6 +19,7 @@ class MainCategoriesController extends Controller
 ###################################################################################################
 public function edit($id){
     $category_edit=Category::findorfail($id);
+    // dd($category_edit);
     $categories=Category::all();
     return view('dashboard.categories.edit',compact('categories','category_edit'));
 }
@@ -33,7 +35,9 @@ public function update(Request $request, $id){
     if(!$category)
     return redirect()->route('admin.maincategories') -> with(['error' => 'it is not found']);
     $category->update([
-        'is_active' => $request -> is_active == 1 ? "1" : "0",
+        $category->is_active = $request -> is_active == 1 ? "1" : "0",
+        $category->slug = $request -> slug,
+        $category->parent_id = null,
     ]);
     $category -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
     $category -> save();
@@ -42,12 +46,12 @@ public function update(Request $request, $id){
 }
 elseif($request->type ==2){
     // return $request;
-    $request->except('parent_id');
+    // $request->except('parent_id');
     $category=Category::findorfail($id);
     if(!$category)
     return redirect()->route('admin.maincategories') -> with(['error' => 'it is not found']);
     $category->update([
-        'is_active' => $request -> is_active == 1 ? "1" : "0",
+        $category->is_active = $request -> is_active == 1 ? "1" : "0",
         $category->slug = $request -> slug,
         $category->parent_id = $request -> parent_id,
     ]);
@@ -83,47 +87,47 @@ public function store(Request $request){
 ####### واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و #######
 #######     By My self  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الأول #######
 // return $request;
-if($request->type ==1)
-    {
-        $category=new Category();
-        $category->name = $request -> name;
-        $category->slug = $request -> slug;
-        $category->is_active = $request -> is_active == 1 ? "1" : "0";
-        $category->save();
-        return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
-    }
-elseif($request->type ==2)
-{
-        $categories=Category::all();
-        $name        =$request -> name;
-        $slug        =$request -> slug;
-        $is_active   =$request -> is_active == 1 ? "1" : "0";
-        return view('dashboard.subcategories.create',compact('categories','name','slug','is_active'));
-    }   
+// if($request->type ==1)
+//     {
+//         $category=new Category();
+//         $category->name = $request -> name;
+//         $category->slug = $request -> slug;
+//         $category->is_active = $request -> is_active == 1 ? "1" : "0";
+//         $category->save();
+//         return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+//     }
+// elseif($request->type ==2)
+// {
+//         $categories=Category::all();
+//         $name        =$request -> name;
+//         $slug        =$request -> slug;
+//         $is_active   =$request -> is_active == 1 ? "1" : "0";
+//         return view('dashboard.subcategories.create',compact('categories','name','slug','is_active'));
+//     }   
 #######     By My self  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الأول #######
 #############################################################################################
 #######     By Emmam  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الثاني #######
 // return $request;
-    // if($request->type ==1)
-    // {
-    // $request->except('parent_id');
-    // $category=new Category();
-    // $category->name = $request -> name;
-    // $category->slug = $request -> slug;
-    // $category->is_active = $request -> is_active == 1 ? "1" : "0";
-    // $category->save();
-    // return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
-    // }
-    // elseif($request->type ==2){
-    // // return $request;
-    // $category=new Category();
-    // $category->name = $request -> name;
-    // $category->slug = $request -> slug;
-    // $category->is_active = $request -> is_active == 1 ? "1" : "0";
-    // $category->parent_id = $request -> parent_id;
-    // $category->save();
-    // return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
-// }
+    if($request->type ==1)
+    {
+    $request->except('parent_id');
+    $category=new Category();
+    $category->name = $request -> name;
+    $category->slug = $request -> slug;
+    $category->is_active = $request -> is_active == 1 ? "1" : "0";
+    $category->save();
+    return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+    }
+    elseif($request->type ==2){
+    // return $request;
+    $category=new Category();
+    $category->name = $request -> name;
+    $category->slug = $request -> slug;
+    $category->is_active = $request -> is_active == 1 ? "1" : "0";
+    $category->parent_id = $request -> parent_id;
+    $category->save();
+    return redirect()->route('admin.maincategories') -> with(['success' => 'it was added successful']);
+}
 #######     By Emmam  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الثاني #######
 #######   واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و  #######
 

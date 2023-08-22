@@ -101,13 +101,13 @@
                                                             </label>
                                                             <select name="parent_id" class="select2 form-control">
                                                                 <optgroup label="من فضلك أختر القسم ">
-                                                                    @if($categories && $categories -> count() > 0)
+                                                                    {{-- @if($categories && $categories -> count() > 0) --}}
                                                                     <optgroup label="من فضلك أختر القسم ">
                                                                         @foreach($categories as $category)
                                                                             <option value="{{$category -> id }}" @if ($category_edit->parent_id == $category->id) selected @endif>{{$category -> name}}</option>
                                                                         @endforeach
                                                                 </optgroup>
-                                                                    @endif
+                                                                    {{-- @endif --}}
                                                                 </optgroup>
                                                             </select>
                                                             @error('parent_id')
@@ -132,16 +132,16 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    
+                                                <div class="row">
 
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="radio"
                                                                    name="type"
                                                                    value="1"
-                                                                   {{-- @if(!$category_edit->parent_id='--') --}}
+                                                                   @if(!$category_edit->parent_id)
                                                                     checked
-                                                                   {{-- @endif --}}
+                                                                   @endif
                                                                    class="switchery"
                                                                    data-color="success"/>
 
@@ -156,22 +156,22 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
                                                             <input type="radio"
-                                                                   name="type"
-                                                                   value="2"
-                                                                   {{-- @if($category_edit->parent_id= 'number') --}}
-                                                                    checked
-                                                                   {{-- @endif --}}
-                                                                   class="switchery" data-color="success"
+                                                            name="type"
+                                                            value="2"
+                                                            @if($category_edit->parent_id)
+                                                            checked
+                                                            @endif
+                                                            class="switchery" data-color="success"
                                                             />
-
+                                                            
                                                             <label
-                                                                class="card-title ml-1">
-                                                                قسم فرعي
-                                                            </label>
-
+                                                            class="card-title ml-1">
+                                                            قسم فرعي
+                                                        </label>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
 
 
@@ -204,12 +204,12 @@
     <script>
         $('input:radio[name="type"]').change(
             function(){
-                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
-                    $('#cats_list').removeClass('hidden');
+                if (this.checked && this.value == '1') {  // 1 if main cat - 2 if sub cat
+                    $('#cats_list').addClass('hidden');
 
                 }else{
-                    $('#cats_list').addClass('hidden');
+                    $('#cats_list').removeClass('hidden');
                 }
             });
     </script>
-    @stop
+@stop
