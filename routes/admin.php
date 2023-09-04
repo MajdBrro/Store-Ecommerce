@@ -72,6 +72,13 @@ Route::group(
             Route::get('delete/{id}', 'TagsController@delete')->name('admin.tags.delete');
         });
         ################################## end Tags    #######################################
+        ################################## Products routes ######################################
+        Route::group(['prefix' => 'Products'], function () {
+            Route::get('/','ProductsController@index')->name('admin.products');
+            Route::get('general-information', 'ProductsController@create')->name('admin.products.general.create');
+            Route::post('store-general-information', 'ProductsController@store')->name('admin.products.general.store');
+        });
+        ################################## end Products    #######################################
     });
     
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'guest:admin','prefix'=> 'admin'], function(){

@@ -39,12 +39,11 @@ public function update(Request $request, $id){
         $category->slug = $request -> slug,
         $category->parent_id = null,
     ]);
-    $category -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
+    $category -> name = $request -> name; // يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
     $category -> save();
     return redirect()->route('admin.maincategories') -> with(['success' => 'it was done successful']);
-    
-}
-elseif($request->type ==2){
+    }
+    elseif($request->type ==2){
     // return $request;
     // $request->except('parent_id');
     $category=Category::findorfail($id);
@@ -58,8 +57,7 @@ elseif($request->type ==2){
     $category -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
     $category -> save();
     return redirect()->route('admin.maincategories') -> with(['success' => 'it was done successful']);
-    
-}
+    }
 #######   واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و  #######
 ####### واحد View يجمع فيها تعديل كل الاقسام مع بعضها ب  Categories  السيناريو الثاني يوجد فقط  #######
 #############################################################################################
@@ -86,7 +84,6 @@ public function create(){
 public function store(Request $request){
 ####### واحدة للجميع View سيناريو توحيد الأقسام جميعها بكونترولر واحد و #######
 #######     By My self  حل التاسك تبع شجرة الافرع الي تتبع لبعضها:  السيناريو الأول #######
-// return $request;
 // if($request->type ==1)
 //     {
 //         $category=new Category();

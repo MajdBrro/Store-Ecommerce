@@ -195,16 +195,17 @@
 
 @stop
 
+
 @section('script')
 
     <script>
         $('input:radio[name="type"]').change(
             function(){
-                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
-                    $('#cats_list').removeClass('hidden');
+                if (this.checked && this.value == '1') {  // 1 if main cat - 2 if sub cat
+                    $('#cats_list').addClass('hidden');
 
                 }else{
-                    $('#cats_list').addClass('hidden');
+                    $('#cats_list').removeClass('hidden');
                 }
             });
     </script>

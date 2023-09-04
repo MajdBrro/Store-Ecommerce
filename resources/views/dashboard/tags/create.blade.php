@@ -12,7 +12,7 @@ Tags Create
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.brands')}}"> 
+                                <li class="breadcrumb-item"><a href="{{route('admin.tags')}}"> 
                                         العلامات </a>
                                 </li>
                                 <li class="breadcrumb-item active"> أضافه علامة
@@ -46,29 +46,20 @@ Tags Create
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.brands.store')}}"
+                                              action="{{route('admin.tags.store')}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
-                                            <div class="form-group">
-                                                <label> صوره الماركة </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('photo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
+                                           
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الماركة التجارية </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات العلامة التجارية </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1">  اسم الماركة التجارية
+                                                            <label for="projectinput1">  اسم العلامة التجارية
                                                             </label>
                                                             <input type="text" id="name"
                                                                    class="form-control"
@@ -81,22 +72,6 @@ Tags Create
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                   name="is_active"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                                   checked/>
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة </label>
-
-                                                            @error("is_active")
-                                                            <span class="text-danger">{{$message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اسم بالرابط
                                                             </label>
@@ -109,71 +84,13 @@ Tags Create
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
-                                                    </div> --}}
-                                                </div>
-
-                                                {{-- <div class="row hidden" id="cats_list" >
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> اختر القسم الرئيسي
-                                                            </label> --}}
-                                                            {{-- <select name="parent_id" class="select2 form-control">
-                                                                <optgroup label="من فضلك أختر القسم ">
-                                                                    @if($categories && $categories -> count() > 0)
-                                                                        @foreach($categories as $category)
-                                                                            <option
-                                                                                value="{{$category -> id }}">{{$category -> name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select> --}}
-                                                            {{-- @error('parent_id')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror --}}
-
-                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                
-
-                                                    {{-- <div class="col-md-3">
-                                                        <div class="form-group mt-1">
-                                                            <input type="radio"
-                                                                   name="type"
-                                                                   value="1"
-                                                                   checked
-                                                                   class="switchery"
-                                                                   data-color="success"
-                                                            />
-
-                                                            <label
-                                                                class="card-title ml-1">
-                                                                قسم رئيسي
-                                                            </label>
-
-                                                        </div>
-                                                    </div> --}}
-
-                                                    {{-- <div class="col-md-3">
-                                                        <div class="form-group mt-1">
-                                                            <input type="radio"
-                                                                   name="type"
-                                                                   value="2"
-                                                                   class="switchery" data-color="success"
-                                                            />
-
-                                                            <label
-                                                                class="card-title ml-1">
-                                                                قسم فرعي
-                                                            </label>
-
-                                                        </div>
-                                                    </div> --}}
-                                                </div>
                                             </div>
-
-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
@@ -198,17 +115,4 @@ Tags Create
 
 @stop
 
-@section('script')
 
-    <script>
-        $('input:radio[name="type"]').change(
-            function(){
-                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
-                    $('#cats_list').removeClass('hidden');
-
-                }else{
-                    $('#cats_list').addClass('hidden');
-                }
-            });
-    </script>
-    @stop

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\BrandTranslation;
 use Illuminate\Http\Request;
 
 class BrandsController extends Controller
@@ -13,6 +14,27 @@ class BrandsController extends Controller
         $brands = Brand::orderBy('id','DESC')->paginate(PAGINATION_COUNT);
         // return $brands;
         return view('dashboard.brands.index',compact('brands'));
+    }
+###################################################################################################
+public function create(){
+    return view('dashboard.brands.create');
+}
+###################################################################################################
+public function store(Request $request){
+    // return $request;
+    $filename=uploadImage('brands',$request->photo);
+    // $filepath='public/assets/images/brands/'. $filename;
+    $brand=new Brand();
+    $brand->name = $request -> name;
+    $brand->is_active = $request -> is_active == 1 ? "1" : "0";
+    $brand->photo=$filename;
+    $brand->save();
+    // Brand::create([
+        //     'name' => $request -> input('name'),
+        //     'is_active' => $request -> is_active == 1 ? "1" : "0",
+        //     'photo'=> $request ->input('photo')
+        // ]);
+        return redirect()->route('admin.brands') -> with(['success' => 'it was added successful']);
     }
 ###################################################################################################
 public function edit($id){
@@ -30,7 +52,7 @@ if($request -> has('photo')){
 }
     $brands->update([
         'is_active' => $request -> is_active == 1 ? "1" : "0",
-        'photo' => $filename,
+        // 'photo' => $filename,
     ]);
     $brands -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
     // $brands -> slug  = str_replace(' ', '-', $request -> name); 
@@ -38,53 +60,33 @@ if($request -> has('photo')){
     return redirect()->route('admin.brands') -> with(['success' => 'it was done successful']);
     
 }
+
 ###################################################################################################
-public function create(){
-    return view('dashboard.brands.create');
-}
-###################################################################################################
-public function store(Request $request){
-    // return $request;
-    $filename=uploadImage('brands',$request->photo);
-    // $filepath='public/assets/images/brands/'. $filename;
-    $brand=new Brand();
-    $brand->name = $request -> name;
-    $brand->is_active = $request -> is_active;
-    $brand->photo=$filename;
-    $brand->save();
-    // Brand::create([
-    //     'name' => $request -> input('name'),
-    //     'is_active' => $request -> is_active == 1 ? "1" : "0",
-    //     'photo'=> $request ->input('photo')
-    // ]);
-    return redirect()->route('admin.brands') -> with(['success' => 'it was added successful']);
-}
+// public function delete($id)
+// {
+//     $del=Brand::Find($id);
+//     // return $del;
+//     $del -> delete();
+//     return redirect()->route('admin.brands') -> with(['success' =>'تم الحذف بنجاح']);
+// }
 ###################################################################################################
 public function delete($id)
 {
-    $del=Brand::Find($id);
-    // return $del;
-    $del -> delete();
-    return redirect()->route('admin.brands') -> with(['success' =>'تم الحذف بنجاح']);
-}
-###################################################################################################
-// public function destroy($id)
-// {
-//     try {
-//         //get specific categories and its translations
-//         $brand = Brand::find($id);
+    try {
+        //get specific categories and its translations
+        $brand = Brand::find($id);
 
-//         if (!$brand)
-//             return redirect()->route('admin.brands')->with(['error' => 'هذا الماركة غير موجود ']);
+        if (!$brand)
+            return redirect()->route('admin.brands')->with(['error' => 'هذا الماركة غير موجود ']);
+        else
+            $brand->delete();
             
-//             $brand->delete();
-            
-//         return redirect()->route('admin.brands')->with(['success' => 'تم  الحذف بنجاح']);
+        return redirect()->route('admin.brands')->with(['success' => 'تم  الحذف بنجاح']);
 
-//     } catch (\Exception $ex) {
-//         return redirect()->route('admin.brands')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-//     }
+    } catch (\Exception $ex) {
+        return redirect()->route('admin.brands')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+    }
     
-// }
+}
 ###################################################################################################
 }
