@@ -50,27 +50,24 @@ Tags Index
                                         <thead class="">
                                         <tr>
                                             <th>الاسم </th>
-                                            <th>الحالة </th>
-                                            <th>صورة الماركة </th>
+                                            <th>الاسم بالرابط </th>
                                             <th>الإجراءات</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
-                                        @isset($brands)
-                                            @foreach($brands as $brand)
+                                        @isset($tags)
+                                            @foreach($tags as $tag)
                                                 <tr>
-                                                    <td>{{$brand -> name}}</td>
-                                                    <td>{{$brand -> getActive()}}</td>
-                                                    {{-- <td>{{$brand -> photo}}</td> --}}
-                                                    <td> <img style="width: 150px; height: 100px;" src="{{ $brand->photo }}"></td>
+                                                    <td>{{$tag -> name}}</td>
+                                                    <td>{{$tag -> slug}}</td>
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                              aria-label="Basic example">
-                                                            <a href="{{route('admin.brands.edit',$brand -> id)}}"
+                                                            <a href="{{route('admin.tags.edit',$tag -> id)}}"
                                                                class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{ __('admin.edit') }}</a>
 
-                                                            <a href="{{route('admin.brands.delete',$brand -> id)}}"
+                                                            <a href="{{route('admin.tags.delete',$tag -> id)}}"
                                                                class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">{{ __('admin.delete') }}</a>
                                                         </div>
                                                     </td>

@@ -132,7 +132,6 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                <div class="row">
 
                                                     <div class="col-md-3">
                                                         <div class="form-group mt-1">
@@ -170,7 +169,6 @@
                                                         </label>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
                                             </div>
 

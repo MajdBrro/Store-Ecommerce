@@ -9,35 +9,11 @@ use Illuminate\Http\Request;
 class TagsController extends Controller
 {
     public function index(){
-        // $brands = Brand::get();
-        $brands = Tag::orderBy('id','DESC')->paginate(PAGINATION_COUNT);
-        // return $brands;
-        return view('dashboard.tags.index',compact('brands'));
+        // $tags = tag::get();
+        $tags = Tag::orderBy('id','DESC')->paginate(PAGINATION_COUNT);
+        // return $tags;
+        return view('dashboard.tags.index',compact('tags'));
     }
-###################################################################################################
-public function edit($id){
-    $brands=Tag::findorfail($id);
-    return view('dashboard.tags.edit',compact('brands'));
-}
-###################################################################################################
-public function update(Request $request, $id){
-    #validation
-    $brands=Tag::findorfail($id);
-    if(!$brands)
-    return redirect()->route('admin.tags') -> with(['error' => 'it is not found']);
-if($request -> has('photo')){
-    $filename=uploadImage('brands',$request->photo);
-}
-    $brands->update([
-        'is_active' => $request -> is_active == 1 ? "1" : "0",
-        'photo' => $filename,
-    ]);
-    $brands -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
-    // $brands -> slug  = str_replace(' ', '-', $request -> name); 
-    $brands -> save();
-    return redirect()->route('admin.tags') -> with(['success' => 'it was done successful']);
-    
-}
 ###################################################################################################
 public function create(){
     return view('dashboard.tags.create');
@@ -45,19 +21,39 @@ public function create(){
 ###################################################################################################
 public function store(Request $request){
     // return $request;
-    $filename=uploadImage('brands',$request->photo);
-    // $filepath='public/assets/images/brands/'. $filename;
-    $brand=new Tag();
-    $brand->name = $request -> name;
-    $brand->is_active = $request -> is_active;
-    $brand->photo=$filename;
-    $brand->save();
-    // Brand::create([
+    // $filename=uploadImage('tags',$request->photo);
+    // $filepath='public/assets/images/tags/'. $filename;
+    $tag=new Tag();
+    $tag->name = $request -> name;
+    $tag->slug = $request -> slug;
+    // $tag->is_active = $request -> is_active == 1 ? "1" : "0";
+    // $tag->photo=$filename;
+    $tag->save();
+    // tag::create([
     //     'name' => $request -> input('name'),
     //     'is_active' => $request -> is_active == 1 ? "1" : "0",
     //     'photo'=> $request ->input('photo')
     // ]);
     return redirect()->route('admin.tags') -> with(['success' => 'it was added successful']);
+}
+###################################################################################################
+public function edit($id){
+    $tags=Tag::findorfail($id);
+    return view('dashboard.tags.edit',compact('tags'));
+}
+###################################################################################################
+public function update(Request $request, $id){
+    #validation
+    $tags=Tag::findorfail($id);
+    if(!$tags)
+    return redirect()->route('admin.tags') -> with(['error' => 'it is not found']);
+    
+   
+    $tags -> name = $request -> name;// يونيك name هنا يوجد ملاحظة انو الباكج نفسها تعتبر ال
+    // $tags -> slug  = str_replace(' ', '-', $request -> name); 
+    $tags -> save();
+    return redirect()->route('admin.tags') -> with(['success' => 'it was done successful']);
+    
 }
 ###################################################################################################
 public function delete($id)
@@ -72,19 +68,20 @@ public function delete($id)
 // {
 //     try {
 //         //get specific categories and its translations
-//         $brand = Brand::find($id);
+//         $tag = tag::find($id);
 
-//         if (!$brand)
-//             return redirect()->route('admin.brands')->with(['error' => 'هذا الماركة غير موجود ']);
+//         if (!$tag)
+//             return redirect()->route('admin.tags')->with(['error' => 'هذا الماركة غير موجود ']);
             
-//             $brand->delete();
+//             $tag->delete();
             
-//         return redirect()->route('admin.brands')->with(['success' => 'تم  الحذف بنجاح']);
+//         return redirect()->route('admin.tags')->with(['success' => 'تم  الحذف بنجاح']);
 
 //     } catch (\Exception $ex) {
-//         return redirect()->route('admin.brands')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+//         return redirect()->route('admin.tags')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
 //     }
     
 // }
 ###################################################################################################
+
 }
