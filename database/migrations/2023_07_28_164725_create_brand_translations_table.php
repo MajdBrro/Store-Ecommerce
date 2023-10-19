@@ -15,10 +15,12 @@ class CreateBrandTranslationsTable extends Migration
     {
         Schema::create('brand_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('brand_id');
+            $table->integer('brand_id')->unsigned();
             $table->string('locale');
             $table->string('name');
             $table->unique(['brand_id', 'locale']);
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+
         });
     }
 

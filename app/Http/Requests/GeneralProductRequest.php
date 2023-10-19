@@ -29,7 +29,7 @@ class GeneralProductRequest extends FormRequest
             'slug' => 'required|unique:products,slug',
             'description' => 'required|max:1000',
             'short_description' => 'nullable|max:500',
-            'categories' => 'array|min:1', //[]
+            // 'categories' => 'array|min:1', //[]
             'categories.*' => 'numeric|exists:categories,id',
             'tags' => 'nullable',
             'brand_id' => 'required|exists:brands,id'

@@ -77,19 +77,23 @@ class Product extends Model
      */
     protected $translatedAttributes = ['name', 'description', 'short_description'];
 
+    
+    public function getActive(){
+        return $this -> is_active == 1 ? __('admin.available') : __('admin.un_available');
+    }
+    
     public function brand()
     {
         return $this->belongsTo(Brand::class)->withDefault();
     }
-
-    public function getActive()
-    {
-        return $this->is_active == 0 ? 'غير مفعل' : 'مفعل';
-    }
-
+   
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
     public function scopeActive($query)
@@ -97,18 +101,10 @@ class Product extends Model
         return $query->where('is_active', 1);
     }
 
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'product_tags');
-    }
-
     public function options()
     {
         return $this->hasMany(Option::class, 'product_id');
     }
-
-    //////
-    ///
 
     public function images()
     {

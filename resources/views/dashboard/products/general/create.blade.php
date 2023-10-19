@@ -125,7 +125,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اختر القسم
                                                             </label>
-                                                            <select name="categories[]" class="select2 form-control" multiple>
+                                                            <select name="categories" class="select2 form-control" multiple>
                                                                 <optgroup label="من فضلك أختر القسم ">
                                                                     @if($categories && $categories -> count() > 0)
                                                                         @foreach($categories as $category)
@@ -135,7 +135,7 @@
                                                                     @endif
                                                                 </optgroup>
                                                             </select>
-                                                            @error('categories.0')
+                                                            @error('categories')
                                                             <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -144,7 +144,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اختر ألعلامات الدلالية
                                                             </label>
-                                                            <select name="tags[]" class="select2 form-control" multiple>
+                                                            <select name="tags" class="select2 form-control" multiple>
                                                                 <optgroup label=" اختر ألعلامات الدلالية ">
                                                                     @if($tags && $tags -> count() > 0)
                                                                         @foreach($tags as $tag)
@@ -163,7 +163,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اختر ألماركة
                                                             </label>
-                                                            <select name="brand_id" class="select2 form-control">
+                                                            <select name="brand_id" class="select2 form-control" >
                                                                 <optgroup label="من فضلك أختر الماركة ">
                                                                     @if($brands && $brands -> count() > 0)
                                                                         @foreach($brands as $brand)
