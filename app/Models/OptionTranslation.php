@@ -9,6 +9,9 @@ class OptionTranslation extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    // protected $fillable=['name'];
     public $timestamps=false;
+    public function translations()
+    {
+        return $this->belongsTo(Option::class,'option_id');
+    }
 }

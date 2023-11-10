@@ -22,5 +22,11 @@ class Option extends Model
     public function attribute(){
         return $this -> belongsTo(Attribute::class,'attribute_id');
     }
+
+    public function translations()
+    {
+        return $this->hasOne(OptionTranslation::class);
+    }
+
    
 }

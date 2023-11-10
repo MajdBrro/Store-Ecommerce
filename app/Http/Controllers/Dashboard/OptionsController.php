@@ -29,6 +29,7 @@ class OptionsController extends Controller
             $attr -> select('id');
         }])->select('id','product_id','attribute_id','price')->paginate(PAGINATION_COUNT);
         // return $options;
+        // $options = Option::with(['product', 'attribute'])->select('id','product_id','attribute_id','price')->paginate(PAGINATION_COUNT);
         return view('dashboard.options.index', compact('options'));
     }
 ####################################################################################################
@@ -81,26 +82,42 @@ public function store(Request $request)
         
     }
     ####################################################################################################
-    
-   
+    public function edit($id){
+        // $data=[];
+        // $data['attributes']= Attribute::get();
+        // $data['products']= Product::get();
+        // $data['options']= Option::findorfail($id);
+        // return view('dashboard.options.edit', $data);
+        $attributes=Attribute::all();
+        $products=Product::all();
+        $options=Option::findorfail($id);
+        return view('dashboard.options.edit',compact('attributes','options','products'));
+    }
+    ####################################################################################################
+    public function update(Request $request){
+        // return $request;
+        //validation
+        $option=Option :: findOrfail($request -> id);
+        if(!$option)
+        return redirect()->route('admin.options') -> with(['error' => 'it is not found']);
+        else
+        $option->update([
+
+            'product_id' => $request -> product_id,
+            'attribute_id' => $request -> attribute_id,
+            'price' => $request -> price,
+        ]);
+        $option -> name= $request -> name;
+        $option -> save();
+        return redirect()->route('admin.options') -> with(['success' => 'it is done successfully']);
+
+    }
     ####################################################################################################
     public function delete($id)
     {
-
-        try {
-            //get specific categories and its translations
-            $option = Option::findOrfail($id);
-
-            if (!$option)
-                return redirect()->route('admin.options')->with(['error' => 'هذا المنتج غير موجود ']);
-
-            $option->delete();
-
-            return redirect()->route('admin.options')->with(['success' => 'تم  الحذف بنجاح']);
-
-        } catch (\Exception $ex) {
-            return redirect()->route('admin.options')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-        }
+            $delopt=Option::findorfail($id);
+            $delopt -> delete();
+            return redirect()->route('admin.options') -> with(['success' => __('admin.it_was_deleted_successfully')]);
     }
     
 }
