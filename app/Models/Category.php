@@ -28,13 +28,9 @@ class Category extends Model
         return $query -> where('is_active',1);
     }
 
-   public function _parent(){
+    public function _parent(){
     return $this -> belongsTo( self::class , 'parent_id');
    }
-
-
-
-
 
     public function getActive(){
         return $this -> is_active == 1 ? __('admin.available') : __('admin.un_available');

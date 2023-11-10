@@ -26,8 +26,8 @@ Route::group(
     ], function(){ 
         
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'auth:admin','prefix' => 'admin'], function(){
-            Route::get('logout','LoginController@logout')-> name('admin.logout');
-            Route::get('dashboard','DashboardController@index')-> name('admin.dashboard');
+        Route::get('logout','LoginController@logout')-> name('admin.logout');
+        Route::get('dashboard','DashboardController@index')-> name('admin.dashboard');
         Route::group(['prefix'=>'settings'],function(){
             Route::get('shipping-methods/{type}','SettingsController@editShippingMethods')->name('edit.shippings.methods');
             Route::PUT('shipping-methods/{id}','SettingsController@updateShippingMethods')->name('update.shippings.methods');
@@ -77,8 +77,40 @@ Route::group(
             Route::get('/','ProductsController@index')->name('admin.products');
             Route::get('general-information', 'ProductsController@create')->name('admin.products.general.create');
             Route::post('store-general-information', 'ProductsController@store')->name('admin.products.general.store');
+            Route::get('delete/{id}', 'ProductsController@delete')->name('admin.products.delete');
+
+           
+            Route::get('price/{id}', 'ProductsController@getPrice')->name('admin.products.price');
+            Route::post('price', 'ProductsController@saveProductPrice')->name('admin.products.price.store');
+
+            Route::get('stock/{id}', 'ProductsController@getStock')->name('admin.products.stock');
+            Route::match(['get', 'post'],'stock', 'ProductsController@saveProductStock')->name('admin.products.stock.store');
+
+            Route::get('images/{id}', 'ProductsController@addImages')->name('admin.products.images');
+            Route::post('images', 'ProductsController@saveProductImages')->name('admin.products.images.store');
+            Route::post('images/db', 'ProductsController@saveProductImagesDB')->name('admin.products.images.store.db');
         });
         ################################## end Products    #######################################
+        ################################## attrributes routes ######################################
+        Route::group(['prefix' => 'attributes'], function () {
+            Route::get('/', 'AttributesController@index')->name('admin.attributes');
+            Route::get('create', 'AttributesController@create')->name('admin.attributes.create');
+            Route::post('store', 'AttributesController@store')->name('admin.attributes.store');
+            Route::get('delete/{id}', 'AttributesController@destroy')->name('admin.attributes.delete');
+            Route::get('edit/{id}', 'AttributesController@edit')->name('admin.attributes.edit');
+            Route::PUT('update/{id}', 'AttributesController@update')->name('admin.attributes.update');
+        });
+        ################################## end attributes    #######################################
+         ################################## attributes options ######################################
+         Route::group(['prefix' => 'options'], function () {
+            Route::get('/', 'OptionsController@index')->name('admin.options');
+            Route::get('create', 'OptionsController@create')->name('admin.options.create');
+            Route::post('store', 'OptionsController@store')->name('admin.options.store');
+            Route::get('delete/{id}','OptionsController@delete') -> name('admin.options.delete');
+            Route::get('edit/{id}', 'OptionsController@edit')->name('admin.options.edit');
+            Route::post('update/{id}', 'OptionsController@update')->name('admin.options.update');
+        });
+        ################################## end options    #######################################
     });
     
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'guest:admin','prefix'=> 'admin'], function(){

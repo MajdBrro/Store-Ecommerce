@@ -92,6 +92,8 @@ main Categories
                         </div>
                     </div>
                 </div>
+                {!! $categories -> links() !!}
+
             </section>
         </div>
     </div>
