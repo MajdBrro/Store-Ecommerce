@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\SMSGateways\VictoryLinkSms;
+use App\Http\Services\SMSServices;
+use App\Http\Services\VerificationServices;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class RegisterController extends Controller
 {
@@ -31,14 +35,19 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    
+    
+    
+    public $sms_services;   
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(VerificationServices $sms_services)
     {
         $this->middleware('guest');
+        $this-> sms_services = $sms_services;
     }
 
     /**
@@ -51,7 +60,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +73,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+
+    //    Try{
+        // FacadesDB::beginTransaction();
+
+           $verification=[];
+           $user = User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
         ]);
+        #####################// Send OTP SMS Code #######################
+        //set new code(generate)
+        //save code in verification table
+        $verification['user_id']=$user->id;
+        $verification_code =$this-> sms_services-> setVerificationCode($verification);
+        $message = $this-> sms_services-> getSMSVerifyMessageByAppName($verification_code->code);
+        
+        //send this code to mobile number
+        // app(VictoryLinkSms::class)->sendSms($user->mobile,$message );
+        #####################// Send OTP SMS Code #######################
+        
+    // }catch(\Exception $ex){
+        // FacadesDB::rollback();
+    // }
+return $user;
     }
+
 }
