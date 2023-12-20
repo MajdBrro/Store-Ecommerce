@@ -101,7 +101,7 @@ Route::group(
             Route::PUT('update/{id}', 'AttributesController@update')->name('admin.attributes.update');
         });
         ################################## end attributes    #######################################
-         ################################## attributes options ######################################
+        ################################## attributes options ######################################
          Route::group(['prefix' => 'options'], function () {
             Route::get('/', 'OptionsController@index')->name('admin.options');
             Route::get('create', 'OptionsController@create')->name('admin.options.create');
@@ -111,6 +111,14 @@ Route::group(
             Route::post('update/{id}', 'OptionsController@update')->name('admin.options.update');
         });
         ################################## end options    #######################################
+        ################################## sliders ######################################
+        Route::group(['prefix' => 'sliders'], function () {
+            Route::get('/', 'SliderController@addImages')->name('admin.sliders.create');
+            Route::post('images', 'SliderController@saveSliderImages')->name('admin.sliders.images.store');
+            Route::post('images/db', 'SliderController@saveSliderImagesDB')->name('admin.sliders.images.store.db');
+
+        });
+        ################################## end sliders    #######################################
     });
     
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'guest:admin','prefix'=> 'admin'], function(){

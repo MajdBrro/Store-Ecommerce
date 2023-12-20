@@ -48,4 +48,5 @@ return [
     'delete' => 'delete',
     'it_was_deleted_successfully' => 'it was deleted successfully',
 
+
 ];
