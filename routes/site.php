@@ -21,15 +21,15 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'namespace'=> 'App\Http\Controllers',
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',/*'VerifiedUser'*/ ]
-    ], function(){ 
+        'namespace'=> 'App\Http\Controllers\Site',
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth',/*'VerifiedUser'*/ ]
+    ], function(){
 
-        
+
+        route::get('/', 'HomeController@home')->name('home');
         // Auth::routes();
 
-        route::get('/', 'HomeController@home')->name('home')->middleware('VerifiedUser');
-        Route::group(['namespace' => 'Site', 'middleware' => ['auth', 'VerifiedUser']], function () {
+        Route::group([ 'middleware' => ['auth', 'VerifiedUser']], function () {
             // must be authenticated user and verified
             Route::get('profile', function () {
                 return 'You Are Authenticated ';
@@ -54,9 +54,9 @@ Route::group(
     // });
 
 });
-    
-    
-    
+
+
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -77,7 +77,7 @@ Route::group(
 //         Auth::routes();
 
 //     });
-    
+
 
 
 ########################Test ROUTES #####################################

@@ -24,8 +24,8 @@ class VerifyCode
             if(Auth::user() -> email_verified_at == null){
                 return redirect(RouteServiceProvider::VERIFIED);
                 }
-            // return redirect(RouteServiceProvider::HOME);
-            return $next($request);
+            return redirect(RouteServiceProvider::HOME);
+            // return $next($request);
         }
     }
 }
