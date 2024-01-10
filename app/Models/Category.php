@@ -13,7 +13,7 @@ class Category extends Model
     protected $with = ['translations'];
     protected $translatedAttributes = ['name'];
     protected $fillable = ['parent_id', 'slug', 'is_active'];
-    // protected $hidden =['translations'];//لكل الداتا الراجعة return لإخفاء الترجمات من الظهور عندما نعمل 
+    // protected $hidden =['translations'];//لكل الداتا الراجعة return لإخفاء الترجمات من الظهور عندما نعمل
     protected $casts = [
         'is_active' => 'boolean',
     ];
@@ -36,6 +36,14 @@ class Category extends Model
         return $this -> is_active == 1 ? __('admin.available') : __('admin.un_available');
         // return  $this -> is_active  == 0 ?  ' مفعل'   : 'غير مفعل' ;
     }
-    
+
+    public function childrens(){
+        return $this -> hasMany(Self::class,'parent_id');
+    }
+
+    public function products()
+    {
+        return $this -> belongsToMany(Product::class,'product_categories');
+    }
 
 }
