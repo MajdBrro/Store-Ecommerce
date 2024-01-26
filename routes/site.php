@@ -22,11 +22,13 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'namespace'=> 'App\Http\Controllers\Site',
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth',/*'VerifiedUser'*/ ]
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',/*'auth',*//*'VerifiedUser'*/ ]
     ], function(){
 
 
         route::get('/', 'HomeController@home')->name('home');
+        route::get('category/{slug}', 'CategoryController@productsBySlug')->name('category');
+        route::get('product/{slug}', 'ProductController@productsBySlug')->name('product.details');
         // Auth::routes();
 
         Route::group([ 'middleware' => ['auth', 'VerifiedUser']], function () {
@@ -34,6 +36,12 @@ Route::group(
             Route::get('profile', function () {
                 return 'You Are Authenticated ';
             });
+        });
+        Route::group(['prefix' => 'cart'], function () {
+            Route::get('/', 'CartController@getIndex')->name('site.cart.index');
+            Route::post('/cart/add/{slug?}', 'CartController@postAdd')->name('site.cart.add');
+            Route::post('/update/{slug}', 'CartController@postUpdate')->name('site.cart.update');
+            Route::post('/update-all', 'CartController@postUpdateAll')->name('site.cart.update-all');
         });
 
     // Route::group(['namespace' => 'Site'/*, 'middleware' => 'guest'*/], function () {
@@ -53,6 +61,11 @@ Route::group(
 
     // });
 
+});
+Route::group(['namespace' => 'Site', 'middleware' => 'auth'], function () {
+    Route::post('wishlist', 'WishlistController@store')->name('wishlist.store');
+    Route::delete('wishlist', 'WishlistController@destroy')->name('wishlist.destroy');
+    Route::get('wishlist/products', 'WishlistController@index')->name('wishlist.products.index');
 });
 
 
