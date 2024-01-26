@@ -171,7 +171,7 @@
                                                                         class="novicon-cart"></i><span>Add to cart</span></a>
                                                             </form>
 
-                                                            <a class="addToWishlist  wishlistProd_22" href="#"
+                                                            <a class="addToWishlist" href="#"
                                                                data-product-id="{{$product -> id}}"
                                                             >
                                                                 <i class="fa fa-heart"></i>
@@ -224,8 +224,8 @@
         </div>
     </div>
 
-    {{-- @include('front.includes.not-logged')
-    @include('front.includes.alert')   <!-- we can use only one with dynamic text -->
+    @include('front.includes.not-logged')
+    {{-- @include('front.includes.alert')   <!-- we can use only one with dynamic text -->
     @include('front.includes.alert2') --}}
 @stop
 
@@ -255,6 +255,7 @@
             @endguest
             $.ajax({
                 type: 'post',
+                url: "{{Route('wishlist.store')}}",
                 data: {
                     'productId': $(this).attr('data-product-id'),
                 },

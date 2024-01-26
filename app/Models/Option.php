@@ -13,7 +13,7 @@ class Option extends Model
     protected $with = ['translations'];
     protected $translatedAttributes = ['name'];
     protected $fillable = ['attribute_id', 'product_id','price'];
-    // protected $hidden =['translations'];//لكل الداتا الراجعة return لإخفاء الترجمات من الظهور عندما نعمل    
+    // protected $hidden =['translations'];//لكل الداتا الراجعة return لإخفاء الترجمات من الظهور عندما نعمل
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
@@ -23,10 +23,10 @@ class Option extends Model
         return $this -> belongsTo(Attribute::class,'attribute_id');
     }
 
-    public function translations()
-    {
-        return $this->hasOne(OptionTranslation::class);
-    }
+    // public function translations()
+    // {
+    //     return $this->hasOne(OptionTranslation::class);
+    // }
 
-   
+
 }

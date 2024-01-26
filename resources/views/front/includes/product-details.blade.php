@@ -50,7 +50,7 @@
                                         </button>
                                     </div>
 
-                                     <a class="addToWishlist  wishlistProd_22" href="#"
+                                     <a class="addToWishlist" href="#"
                                         data-product-id="{{$product -> id}}"
                                      >
                                          <i class="fa fa-heart"></i>
