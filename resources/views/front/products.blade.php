@@ -166,7 +166,7 @@
                                                                 @csrf
                                                                 <input type="hidden" name="id_product"
                                                                        value="{{$product -> id}}">
-                                                                <a class="add-to-cart cart-addition" data-product-id="{{$product -> id}}" data-product-slug="{{$product -> slug}}" href="#"
+                                                                <a class="add-to-cart cart-addition" data-product-id="{{$product -> id}}" data-product-slug="{{$product -> slug}}" href="####"
                                                                    data-button-action="add-to-cart"><i
                                                                         class="novicon-cart"></i><span>Add to cart</span></a>
                                                             </form>
@@ -225,8 +225,8 @@
     </div>
 
     @include('front.includes.not-logged')
-    {{-- @include('front.includes.alert')   <!-- we can use only one with dynamic text -->
-    @include('front.includes.alert2') --}}
+    @include('front.includes.alert')   <!-- we can use only one with dynamic text -->
+    @include('front.includes.alert2')
 @stop
 
 @section('scripts')
@@ -273,6 +273,7 @@
 
             $.ajax({
                 type: 'post',
+                url:"{{route('site.cart.add')}}",
                 data: {
                     'product_id': $(this).attr('data-product-id'),
                     'product_slug' : $(this).attr('data-product-slug'),

@@ -22,7 +22,7 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'namespace'=> 'App\Http\Controllers\Site',
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',/*'auth',*//*'VerifiedUser'*/ ]
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth'/*'VerifiedUser'*/ ]
     ], function(){
 
 
@@ -81,6 +81,8 @@ Route::group(
         // });
         Route::get('verify','VerificationCodeController@getVerifypage')->name('get.verification.form');
         Route::post('verify-user', 'VerificationCodeController@verify')-> name('verify-user');
+        Route::get('payment/{amount}', 'PaymentController@getPayments') -> name('payment');
+        Route::post('payment', 'PaymentController@processPayment') -> name('payment.process');
     });
 // Route::group(
 //     [

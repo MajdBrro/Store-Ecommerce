@@ -23,8 +23,8 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){ 
-        
+    ], function(){
+
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'auth:admin','prefix' => 'admin'], function(){
         Route::get('logout','LoginController@logout')-> name('admin.logout');
         Route::get('dashboard','DashboardController@index')-> name('admin.dashboard');
@@ -79,7 +79,7 @@ Route::group(
             Route::post('store-general-information', 'ProductsController@store')->name('admin.products.general.store');
             Route::get('delete/{id}', 'ProductsController@delete')->name('admin.products.delete');
 
-           
+
             Route::get('price/{id}', 'ProductsController@getPrice')->name('admin.products.price');
             Route::post('price', 'ProductsController@saveProductPrice')->name('admin.products.price.store');
 
@@ -119,8 +119,17 @@ Route::group(
 
         });
         ################################## end sliders    #######################################
+        ################################## roles ######################################
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', 'RolesController@index')->name('admin.roles.index');
+            Route::get('create', 'RolesController@create')->name('admin.roles.create');
+            Route::post('store', 'RolesController@saveRole')->name('admin.roles.store');
+            Route::get('/edit/{id}', 'RolesController@edit') ->name('admin.roles.edit') ;
+            Route::post('update/{id}', 'RolesController@update')->name('admin.roles.update');
+         });
+        ################################## end roles ######################################
     });
-    
+
     Route::group(['namespace'=>'App\Http\Controllers\Dashboard','middleware'=>'guest:admin','prefix'=> 'admin'], function(){
 //         // Route::get('login', function(){
 //         //     return "please login with the admin account";
