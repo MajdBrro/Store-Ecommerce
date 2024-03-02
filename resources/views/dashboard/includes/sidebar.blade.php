@@ -22,18 +22,18 @@
                 </ul>
             </li>
 
-
+            @can('categories')
             <li class="active" class="nav-item"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام  </span>
                     <span
-    class="badge badge badge-danger badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span>
-                    
+            class="badge badge badge-danger badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span>
+
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{ route('admin.maincategories') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الأقسام  </a>
                     </li>
-                    
+
                     {{-- <li class="active"><a class="menu-item" href="{{ route('admin.subcategories') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الأقسام الفرعية </a>
                     </li> --}}
@@ -42,7 +42,7 @@
                     </li>
                 </ul>
             </li>
-
+            @endcan
             {{-- <li class="nav-item"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية   </span>
                     <span
@@ -57,7 +57,7 @@
                     </li>
                 </ul>
             </li> --}}
-
+            @can('brands')
             <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الماركات   </span>
                     <span
@@ -72,6 +72,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('tags')
             <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> tags العلامات   </span>
                     <span
@@ -86,6 +88,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('products')
             <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> المنتجات   </span>
                     <span
@@ -100,6 +104,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('attributes')
             <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> خصائص المنتجات  </span>
                     <span
@@ -114,6 +120,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('options')
             <li class="active" class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> قيم الخصائص  </span>
                     <span
@@ -128,7 +136,36 @@
                     </li>
                 </ul>
             </li>
-
+            @endcan
+            @can('roles')
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الصلاحيات </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.roles.index')}}"
+                                        data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.roles.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                            جديدة </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+            @can('users')
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">مستخدمي لوحة التحكم</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.users.index')}}"
+                                        data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.users.create')}}" data-i18n="nav.dash.crypto">أاضافة
+                            جديدة </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+            @can('settings')
             <li   class="active" class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
                                                                                     data-i18n="nav.templates.main">{{ __('admin.settings') }}</span></a>
                 <ul class="menu-content">
@@ -142,19 +179,23 @@
                             <li class="active"><a class="menu-item" href="{{ route('edit.shippings.methods','external') }}"
                                    data-i18n="nav.templates.vert.compact_menu">{{ __('admin.external-shipping') }}</a>
                             </li>
-                           
+
                         </ul>
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('sliders')
             <li><a class="menu-item" href="#"
               data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.main slider')}} </a>
-           <ul class="menu-content">
-               <li><a class="menu-item" href="{{route('admin.sliders.create')}}"
-                      data-i18n="nav.templates.vert.classic_menu">صور الاسليدر </a>
-               </li>
-           </ul>
-       </li>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="{{route('admin.sliders.create')}}"
+                            data-i18n="nav.templates.vert.classic_menu">صور الاسليدر </a>
+                    </li>
+                </ul>
+             </li>
+            @endcan
+
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"
                                                                         data-toggle="tooltip"

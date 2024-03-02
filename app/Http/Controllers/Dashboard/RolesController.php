@@ -12,7 +12,7 @@ class RolesController extends Controller
 {
     public function index()
     {
-        $roles = Role::get(); // use pagination and  add custom pagination on index.blade
+         $roles = Role::get(); // use pagination and  add custom pagination on index.blade
         return view('dashboard.roles.index', compact('roles'));
     }
 
@@ -23,7 +23,6 @@ class RolesController extends Controller
 
     public function saveRole(RolesRequest $request)
     {
-
         try {
 
             $role = $this->process(new Role, $request);
